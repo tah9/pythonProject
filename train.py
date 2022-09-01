@@ -10,6 +10,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
+# 插入全国列车（包含经过站点、时间等信息）
 
 # 连接数据库
 connect = pymysql.connect(host="localhost", port=3306, user="root", password="123456++q", database="transport",
@@ -32,8 +33,7 @@ driver = webdriver.Chrome(
     desired_capabilities=capa)
 wait = WebDriverWait(driver, 20)  # 等待的最大时间20s
 
-# types = '动车 市郊 快慢 快速 普客 普快 特快 直特 高速'.split(' ')
-types = '特快 直特 高速'.split(' ')  # 1小时
+types = '动车 市郊 快慢 快速 普客 普快 特快 直特 高速'.split(' ')
 
 
 def getHasStationTableIndex():
@@ -57,8 +57,8 @@ for trainType in types:
         for i in range(8, len(stationTable), 8):
             stationNumber = stationTable[i]
             stationName = stationTable[i+1]
-            startTime = stationTable[i+3]
-            endTime = stationTable[i+4]
+            startTime = stationTable[i+4]
+            endTime = stationTable[i+3]
             time = stationTable[i+5]
             arriveDate = stationTable[i+6]
             stopTime = stationTable[i+7]
